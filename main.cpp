@@ -2,34 +2,29 @@
 #include <stdlib.h>
 #include "QuadraticProbing.h"
 
-using namespace std;
-
 double avgProbe(int items);
 
 int main()
 {
     int items=0;
-    double avg;
 
     while(items >= 0)
     {
-        cout << "enter number of items to insert: ";
+        cout << "Enter number of items to insert: ";
         cin >> items;
-        avg = avgProbe(items);
-        cout << endl << "The average number of probes for the last of " << items 
-             << " inserts was " << avg << endl;
     }
     
     return 0;
 }
 
-
 //insert n items, run 100 times, return avg of final probes
 double avgProbe(int items)
 {
     int k, i, j;
-    double avg = 0;
-    HashTable<int> table(101);
+    double avg1 = 0;
+    double avg2 = 0;
+    HashTable<int> table1(101);
+    HashTable<int> table2(101);
     
 
     //insert "items" random values into the Hashtable
@@ -38,14 +33,23 @@ double avgProbe(int items)
         for(i=0; i<items; i++)
         {
             k = rand()  % 1000;
-            while(table.contains(k))
+            while(table1.contains(k))
                 k=rand() % 1000; 
-            table.insert(k);
+            table1.insert(k);
+            table2.insert(k);
         }
-        cout << table.getProbes() << endl;
-        avg += table.getProbes();
-        table.makeEmpty();
+        avg1 += table1.getProbes();
+        avg2 += table2.getProbes();
+        table1.makeEmpty();
+        table2.makeEmpty();
     }
-    
-    return avg/100;
+    avg1 = avg1/100;
+    avg2 = avg2/100;
+
+    cout << endl << "The average number of probes for the last of " << items 
+            << " quadratic inserts was " << avg1 << endl;
+    cout << endl << "The average number of probes for the last of " << items 
+            << " linear inserts was " << avg2 << endl;
+
+    return 0;
 }

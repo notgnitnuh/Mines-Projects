@@ -92,6 +92,30 @@ class HashTable
 
         return true;
     }
+
+    bool linearInsert(const HashedObj & x)
+    {
+        int currentPos = myhas(x);
+        numProbes = 1;
+
+        while(isActive(currentPos))      //search till find availible spot
+        {
+            if(currentPos > array.size())  //loop if reach end
+                currentPos = 0;
+            else                        //else step through
+                currentPos++;
+            numProbes++;
+        }
+
+        array[ currentPos ].element = x;
+        array[ currentPos ].info = ACTIVE;
+
+            // Rehash; see Section 5.5
+        if( currentSize > array.size( ) / 2 )
+            rehash( );
+
+        return true;
+    }
     
     bool insert( HashedObj && x )
     {
