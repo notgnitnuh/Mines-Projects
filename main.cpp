@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "QuadraticProbing.h"
 
-double avgProbe(int items);
+void avgProbe(int items);
 
 int main()
 {
@@ -12,13 +12,14 @@ int main()
     {
         cout << "Enter number of items to insert: ";
         cin >> items;
+        avgProbe(items);
     }
     
     return 0;
 }
 
 //insert n items, run 100 times, return avg of final probes
-double avgProbe(int items)
+void avgProbe(int items)
 {
     int k, i, j;
     double avg1 = 0;
@@ -51,5 +52,4 @@ double avgProbe(int items)
     cout << endl << "The average number of probes for the last of " << items 
             << " linear inserts was " << avg2 << endl;
 
-    return 0;
 }
