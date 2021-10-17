@@ -63,7 +63,8 @@ class HashTable
 
     bool contains( const HashedObj & x ) const
     {
-        return isActive( findPos( x ) );
+        int i = findPos(x);
+        return isActive( i );
     }
 
     void makeEmpty( )
@@ -95,7 +96,7 @@ class HashTable
 
     bool linearInsert(const HashedObj & x)
     {
-        int currentPos = myhas(x);
+        int currentPos = myhash(x);
         numProbes = 1;
 
         while(isActive(currentPos))      //search till find availible spot
@@ -215,6 +216,5 @@ class HashTable
         return hf( x ) % array.size( );
     }
 };
-
 
 #endif
